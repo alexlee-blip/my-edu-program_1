@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Food Safety & Workplace Safety Masterclass (Strict 15-Question Assessment)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        .progress-bar {
+            transition: width 0.4s ease-in-out;
+        }
+        .slide-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .slide-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .slide-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* ==========================================================================
+           모든 항목별 전용 개별 프리미엄 세부 다이나믹 애니메이션 키프레임 정의
+           ========================================================================== */
+        
+        /* t1: 수도꼭지 흐름 + 손세척 마찰 */
+        @keyframes flow-water { 0% { transform: translateY(-15px) scaleY(0.4); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(22px) scaleY(1.4); opacity: 0; } }
+        .anim-t1-water { animation: flow-water 0.7s infinite linear; }
+        @keyframes rub-hands { 0%, 100% { transform: rotate(-8deg) translateX(-4px); } 50% { transform: rotate(8deg) translateX(4px); } }
+        .anim-t1-rub { animation: rub-hands 0.4s infinite ease-in-out; }
+
+        /* t2: 롤 디스펜서 종이타월 당김 */
+        @keyframes pull-paper { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(14px); filter: brightness(1.15); } }
+        .anim-t2-paper { animation: pull-paper 1.2s infinite ease-in-out; }
+
+        /* t3: 유람 센서 및 경고 종 */
+        @keyframes bell-ring { 0%, 100% { transform: rotate(0deg); } 20%, 60% { transform: rotate(-20deg); filter: drop-shadow(0 0 6px #eab308); } 40%, 80% { transform: rotate(20deg); filter: drop-shadow(0 0 6px #eab308); } }
+        .anim-t3-bell { animation: bell-ring 1.3s infinite ease-in-out; }
+
+        /* t51: 니트릴 고무장갑 세척 및 Chux 닦기 */
+        @keyframes glove-scrub { 0%, 100% { transform: scale(1) rotate(-5deg); } 50% { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 0 8px #3b82f6); } }
+        .anim-t51-glove { animation: glove-scrub 0.6s infinite ease-in-out; }
+
+        /* t4: 거품 파티클 팝업 */
+        @keyframes bubble-rise { 0% { transform: translateY(20px) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-25px) scale(1.2); opacity: 0; } }
+        .anim-t4-bubble { animation: bubble-rise 0.9s infinite ease-out; }
+
+        /* t5: 기침 Vibrate 신고 */
+        @keyframes cough-shake { 0%, 100% { transform: scale(1) translateX(0); } 15%, 45% { transform: scale(1.1) translateX(-3px); } 30%, 60% { transform: scale(0.9) translateX(3px); } }
+        .anim-t5-cough { animation: cough-shake 1.1s infinite ease-in-out; }
+
+        /* t8: 헤어망 펄스 */
+        @keyframes net-pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 6px #3b82f6); } }
+        .anim-t8-pulse { animation: net-pulse 1.5s infinite ease-in-out; }
+
+        /* t9: 가위표 반짝임 */
+        @keyframes ban-blink { 0%, 100% { opacity: 0.2; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 8px #ef4444); } }
+        .anim-t9-blink { ban-blink 1.2s infinite ease-in-out; }
+
+        /* t10: 청색 방수 밴드 포개짐 */
+        @keyframes band-wrap { 0%, 100% { transform: scaleX(0.9) skewX(-3deg); } 50% { transform: scaleX(1.05) skewX(3deg); } }
+        .anim-t10-wrap { animation: band-wrap 1s infinite ease-in-out; }
+
+        /* t11: 온도계 수은 급상승 급강하 */
+        @keyframes mercury-gauge { 0%, 100% { height: 15%; background: #3b82f6; } 45% { height: 85%; background: #dc2626; filter: drop-shadow(0 0 10px #ef4444); } 55% { height: 85%; background: #dc2626; } }
+        .anim-t11-mercury { animation: mercury-gauge 3.5s infinite ease-in-out; }
+
+        /* t12: 시계 초침 째깍거림 */
+        @keyframes clock-ticks { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .anim-t12-ticks { transform-origin: center; animation: clock-ticks 3s infinite linear; }
+
+        /* t13: 오렌지 안전 경보 펄스 */
+        @keyframes pulse-border { 0%, 100% { box-shadow: 0 0 2px #d97706; transform: scale(0.98); } 50% { box-shadow: 0 0 14px #d97706; transform: scale(1.02); } }
+        .anim-t13-border { animation: pulse-border 1s infinite ease-in-out; }
+
+        /* t14: 쓰레기 낙하 폐기 */
+        @keyframes trash-fall { 0% { transform: translateY(-20px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(20px); opacity: 0; } }
+        .anim-t14-fall { animation: trash-fall 1.2s infinite cubic-bezier(0.5, 0, 0.75, 0); }
+
+        /* t15: 75도 고온 살균 스팀 피즈 */
+        @keyframes steam-rise { 0% { transform: translateY(6px) scaleX(0.8); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-16px) scaleX(1.2); opacity: 0; } }
+        .anim-t15-steam { animation: steam-rise 0.7s infinite ease-out; }
+
+        /* t16: 2단계 급속 냉각 타겟 슬라이더 */
+        @keyframes bar-slide { 0% { width: 0%; opacity: 0.4; } 50% { opacity: 1; } 100% { width: 100%; opacity: 0.4; } }
+        .anim-t16-slide { animation: bar-slide 3s infinite linear; }
+
+        /* t17: 냉동 해동 물방울 드립 */
+        @keyframes drip-drop { 0% { transform: translateY(-10px); opacity: 0; } 25% { opacity: 1; } 100% { transform: translateY(20px); opacity: 0; } }
+        .anim-t17-drip { animation: drip-drop 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* t18: 레인지 턴테이블 스핀 */
+        @keyframes turntable-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .anim-t18-spin { animation: turntable-spin 2.5s infinite linear; }
+
+        /* t19: 얼음 슬러리 수축 용해 */
+        @keyframes cube-shrink { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(0.6) rotate(15deg); opacity: 0.4; } }
+        .anim-t19-shrink { animation: cube-shrink 2.5s infinite ease-in-out; }
+
+        /* t20: 일지 리프레시 새로고침 */
+        @keyframes log-refresh { 0%, 100% { transform: translateY(0); } 15% { transform: translateY(-3px) rotate(-1deg); } 30% { transform: translateY(1px) rotate(1deg); } }
+        .anim-t20-refresh { animation: log-refresh 2s infinite ease-in-out; }
+
+        /* t21: 적색육 도마 썰기 모션 */
+        @keyframes knife-chop { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-15px) rotate(-20deg); } 65% { transform: translateY(1px); } }
+        .anim-t21-chop { animation: knife-chop 0.4s infinite ease-in-out; }
+
+        /* t22: 보호막 네온 쉴드 */
+        @keyframes shield-glow { 0%, 100% { transform: scale(0.95); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 10px #fbbf24); } }
+        .anim-t22-shield { animation: shield-glow 0.8s infinite ease-in-out; }
+
+        /* t23: 생선 꼬리 파동 요동 */
+        @keyframes fish-wag { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(15deg); } }
+        .anim-t23-wag { transform-origin: left center; animation: fish-wag 0.45s infinite ease-in-out; }
+
+        /* t24: 야채 슬라이드 구르기 */
+        @keyframes vege-roll { 0%, 100% { transform: rotate(0) translateY(0); } 50% { transform: rotate(180deg) translateY(-5px); } }
+        .anim-t24-roll { animation: vege-roll 1.3s infinite ease-in-out; }
+
+        /* t25: 완제품 빵 전용 슬라이스 */
+        @keyframes bread-slice { 0%, 100% { transform: translateX(-10px); } 50% { transform: translateX(10px) translateY(-3px); } }
+        .anim-t25-slice { animation: bread-slice 0.7s infinite ease-in-out; }
+
+        /* t26: 도마 균열 흔들림 경고 */
+        @keyframes crack-shake { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(-6deg); filter: drop-shadow(0 0 5px #ef4444); } 30% { transform: rotate(6deg); } }
+        .anim-t26-shake { animation: crack-shake 1.5s infinite ease-in-out; }
+
+        /* t27: 세로 냉장고 수직 정렬 하향 위에서 아래 드립 애니메이션 */
+        @keyframes anim-fridge-down { 
+            0% { transform: translateY(-30px); opacity: 0; } 
+            20% { opacity: 1; } 
+            80% { opacity: 1; } 
+            100% { transform: translateY(30px); opacity: 0; } 
+        }
+        .anim-t27-flow { animation: anim-fridge-down 2.2s infinite ease-in-out; }
+
+        /* t28: 냉장고 선반 FIFO 선입선출 안쪽에서 바깥쪽으로 슬라이딩 무브먼트 */
+        @keyframes anim-fifo-move { 
+            0% { transform: translateX(-35px) translateY(-10px) scale(0.85); opacity: 0; } 
+            20% { opacity: 0.9; } 
+            80% { opacity: 0.9; } 
+            100% { transform: translateX(25px) translateY(10px) scale(1.05); opacity: 0; } 
+        }
+        .anim-t28-fifo { animation: anim-fifo-move 3s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+        /* t29: 뚜껑 회전 락 */
+        @keyframes plastic-lid { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-30deg); } }
+        .anim-t29-lid { transform-origin: left bottom; animation: plastic-lid 2s infinite ease-in-out; }
+
+        /* t30: 건조 선반 공기 부유 */
+        @keyframes dry-wind { 0%, 100% { opacity: 0.3; transform: scaleX(0.9); } 50% { opacity: 1; transform: scaleX(1.1) filter(drop-shadow(0 0 4px #0ea5e9)); } }
+        .anim-t30-wind { animation: dry-wind 1.3s infinite ease-in-out; }
+
+        /* t31: 식기 클렌징 세척 팝업 */
+        @keyframes clean-spin { 0% { transform: rotate(0); } 50% { transform: rotate(180deg) scale(1.05); } 100% { transform: rotate(360deg); } }
+        .anim-t31-spin { animation: clean-spin 3.5s infinite ease-in-out; }
+
+        /* t34: 주방 헹굼 노즐 온도가 올라가는 박동 */
+        @keyframes temp-pump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); filter: drop-shadow(0 0 6px #dc2626); } }
+        .anim-t34-pump { animation: temp-pump 1.2s infinite ease-in-out; }
+
+        /* t35: 슬라이스 거치대 바람 분사 */
+        @keyframes fan-spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+        .anim-t35-spin { transform-origin: center; animation: fan-spin 0.3s infinite linear; }
+
+        /* t36: 플라스크 화학 희석 액체 웨이브 */
+        @keyframes dilute-level { 0%, 100% { transform: translateY(5px) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2deg); } }
+        .anim-t36-level { animation: dilute-level 2s infinite ease-in-out; }
+
+        /* t37: SDS 안전 가이드 한 장 넘기기 */
+        @keyframes sds-page { 0%, 100% { transform: rotateY(0); } 50% { transform: rotateY(-70deg); } }
+        .anim-t37-page { transform-origin: left center; animation: sds-page 2s infinite ease-in-out; }
+
+        /* t38: 열쇠 시건 스핀 회전 */
+        @keyframes key-turn { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-20deg); } 75% { transform: rotate(90deg) scale(1.05); } }
+        .anim-t38-turn { transform-origin: center; animation: key-turn 1.6s infinite ease-in-out; }
+
+        /* t39: 바닥 물청소 문지름 */
+        @keyframes floor-scrub { 0% { transform: translate(-15px, -5px) scale(0.95); } 50% { transform: translate(15px, 5px) scale(1.05); filter: drop-shadow(0 0 5px #38bdf8); } 100% { transform: translate(-15px, -5px) scale(0.95); } }
+        .anim-t39-scrub { animation: floor-scrub 1.3s infinite ease-in-out; }
+
+        /* t40: 미스트 에어로졸 분사 궤적 */
+        @keyframes mist-spray { 0% { transform: scale(0.5) translate(0,0); opacity: 0; } 15% { opacity: 1; } 100% { transform: scale(1.6) translate(25px, -12px); opacity: 0; } }
+        .anim-t40-spray { animation: mist-spray 0.9s infinite linear; }
+
+        /* t41: 알레르기 해골 경고 진동 */
+        @keyframes allergen-vibe { 0%, 100% { transform: scale(1) rotate(0); } 15% { transform: scale(1.08) rotate(-7deg); filter: drop-shadow(0 0 8px #f43f5e); } 30% { transform: scale(0.92) rotate(7deg); } }
+        .anim-t41-vibe { animation: allergen-vibe 1.2s infinite ease-in-out; }
+
+        /* t42: 집게 그립 집기 조작 */
+        @keyframes tong-pinch { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-15deg); } }
+        .anim-t42-pinch { transform-origin: bottom center; animation: tong-pinch 0.5s infinite ease-in-out; }
+
+        /* t43: 물음표 점프 바이어스 */
+        @keyframes ask-jump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px) scale(1.05); } }
+        .anim-t43-jump { animation: ask-jump 1.3s infinite ease-in-out; }
+
+        /* t44: 에피펜 주사 발사 수직 모션 */
+        @keyframes epi-inject { 0%, 100% { transform: translateY(-10px); } 40% { transform: translateY(15px); filter: brightness(1.25); } 50% { transform: translateY(15px); } }
+        .anim-t44-inject { animation: epi-inject 0.9s infinite cubic-bezier(0.25, 1, 0.5, 1); }
+
+        /* t45: Wet Floor 노란색 안내판의 입체적 스웨이 흔들림 */
+        @keyframes sway-heavy { 0%, 100% { transform: rotate(-6deg) skewX(-2deg); } 50% { transform: rotate(6deg) skewX(2deg); filter: drop-shadow(0 6px 10px rgba(217,119,6,0.25)); } }
+        .anim-t45-sway { transform-origin: top center; animation: sway-heavy 1.3s infinite ease-in-out; }
+
+        /* t46: 송풍 건조기 팬 회전 */
+        @keyframes fan-wind { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; transform: scale(1.1); } }
+        .anim-t46-wind { animation: fan-wind 1.4s infinite ease-in-out; }
+
+        /* t47: 보행 시 식칼 안전 수직 고정 */
+        @keyframes knife-down { 0%, 100% { transform: translateY(0) rotate(180deg); } 50% { transform: translateY(7px) rotate(180deg); } }
+        .anim-t47-down { animation: knife-down 1s infinite ease-in-out; }
+
+        /* t48: 튀김기 격렬한 불꽃 튀김 및 버블 끓음 - 애니메이션 고도화 추가 */
+        @keyframes fryer-heavy-heat { 
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); } 
+            25% { transform: translateY(-3px) scaleX(1.05) scaleY(0.95); filter: brightness(1.15) drop-shadow(0 0 4px #ea580c); } 
+            75% { transform: translateY(1px) scaleX(0.95) scaleY(1.05); filter: brightness(0.9); } 
+        }
+        .anim-t48-heat { animation: fryer-heavy-heat 0.35s infinite ease-in-out; }
+
+        /* t49: 자재 적재 무릎 힘 리프팅 */
+        @keyframes lift-squat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+        .anim-t49-squat { animation: lift-squat 1.5s infinite ease-in-out; }
+
+        /* t50: 벌레 기어감 차단 금지망 바이브 */
+        @keyframes bug-wiggle { 0% { transform: translate(-10px, 10px) rotate(35deg); } 50% { transform: translate(10px, -5px) rotate(45deg); } 100% { transform: translate(-10px, 10px) rotate(35deg); } }
+        .anim-t50-bug { animation: bug-wiggle 1.6s infinite linear; }
+
+        /* t51_glove: 글러브 세척 및 Chux 타올 모션 */
+        @keyframes glove-scrub-pro { 0%, 100% { transform: scale(1) rotate(-6deg) translateY(0); } 50% { transform: scale(1.08) rotate(6deg) translateY(4px); filter: drop-shadow(0 0 8px #60a5fa); } }
+        .anim-t51-glove { animation: glove-scrub-pro 0.55s infinite ease-in-out; }
+
+        .anim-bg-glow { animation: net-pulse 2s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- 글로벌 헤더 -->
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shield-halved text-2xl text-emerald-200"></i>
+                <div>
+                    <h1 class="font-bold text-lg md:text-xl">Food Safety & Hygiene Masterclass</h1>
+                    <p class="text-xs text-emerald-100">FSANZ Standard 3.2.2 & WHS Regulations (45 Premium Unique Animations)</p>
+                </div>
+            </div>
+            <div id="header-badge" class="bg-emerald-800 px-3 py-1 rounded-full text-xs font-semibold">
+                Interactive Learning
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="max-w-4xl w-full mx-auto px-4 py-8 flex-grow">
+        
+        <div id="training-section" class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm p-5 md:p-8 border border-slate-100">
+                
+                <div class="flex justify-between items-center mb-6">
+                    <span id="slide-num" class="text-xs font-bold text-emerald-600 tracking-wider uppercase">Loading Modules...</span>
+                    <div class="w-1/3 bg-slate-200 rounded-full h-2">
+                        <div id="slide-progress" class="bg-emerald-600 h-2 rounded-full progress-bar" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div id="slide-content" class="min-h-[500px] max-h-[680px] overflow-y-auto pr-2 slide-scroll flex flex-col justify-between">
+                    <!-- 자바스크립트로 수칙 주입 -->
+                </div>
+
+            </div>
+
+            <div class="flex justify-between items-center px-2">
+                <button id="prev-btn" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-medium hover:bg-slate-100 transition disabled:opacity-50 disabled:pointer-events-none flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> 이전 (Prev)
+                </button>
+                <button id="next-btn" class="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition shadow-sm flex items-center gap-2">
+                    다음 (Next) <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="quiz-section" class="hidden space-y-6">
+            <div id="quiz-intro" class="bg-white rounded-2xl shadow-md p-6 md:p-10 border border-slate-100 text-center space-y-6 max-w-2xl mx-auto">
+                <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-bold text-slate-800">Food & Venue Safety Quiz</h2>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Test your knowledge with 15 random multiple-choice questions.<br>
+                        Verify your safety awareness before working! (Passing Score: 80% or higher)<br>
+                        <span class="text-xs text-amber-600 font-bold">[엄격 검증 모드] 문제 풀이 도중에는 틀려도 정답이 공개되지 않으며, 최종 성적표(80% 이상 획득 시)에서 오답노트가 제공됩니다.</span>
+                    </p>
+                </div>
+                <button id="start-quiz-btn" class="w-full py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-100 flex items-center justify-center gap-2">
+                    퀴즈 시작하기 (Start Quiz) <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+
+            <div id="quiz-active" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 space-y-6">
+                <div class="flex justify-between items-center">
+                    <span id="quiz-num" class="text-xs font-bold text-emerald-600 tracking-wider">QUESTION 1 / 15</span>
+                    <div class="w-1/3 bg-slate-200 rounded-full h-2">
+                        <div id="quiz-progress" class="bg-emerald-600 h-2 rounded-full progress-bar" style="width: 6.6%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 id="quiz-question" class="text-lg md:text-xl font-bold text-slate-800 leading-snug">
+                        Question text loads here.
+                    </h3>
+                </div>
+
+                <div id="quiz-options" class="grid grid-cols-1 gap-3">
+                    <!-- 보기가 배치되는 곳 -->
+                </div>
+
+                <div id="quiz-feedback" class="hidden p-4 rounded-xl border transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <span id="feedback-icon" class="text-xl mt-0.5"></span>
+                        <div>
+                            <h4 id="feedback-title" class="font-bold text-sm">Result</h4>
+                            <p id="feedback-text" class="text-xs mt-1 leading-relaxed font-normal">Explanation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="quiz-next-btn" class="hidden w-full py-3 bg-slate-800 text-white font-semibold rounded-xl hover:bg-slate-950 transition flex items-center justify-center gap-2">
+                    다음 문제로 (Next Question) <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div id="quiz-result" class="hidden bg-white rounded-2xl shadow-md p-6 md:p-10 border border-slate-100 text-center space-y-8 max-w-2xl mx-auto">
+                <div>
+                    <div id="result-medal" class="w-24 h-24 rounded-full flex items-center justify-center mx-auto text-5xl mb-4">
+                        🏆
+                    </div>
+                    <h2 id="result-title" class="text-2xl font-bold text-slate-800">Assessment Results</h2>
+                    <p id="result-score" class="text-4xl font-extrabold text-emerald-600 my-3">100 / 100</p>
+                    <p id="result-desc" class="text-slate-500 text-sm max-w-md mx-auto">
+                        Feedback description.
+                    </p>
+                </div>
+
+                <div id="wrong-answers-section" class="border-t border-slate-100 pt-6 space-y-4">
+                    <h4 class="font-bold text-sm text-slate-700 text-left">Incorrect Answers Review & Answers Key (오답 노트 및 정답해설)</h4>
+                    <div id="wrong-answers-list" class="space-y-3 text-left max-h-64 overflow-y-auto pr-2">
+                        <!-- 오답 카드 주입부 -->
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button id="retry-btn" class="flex-1 py-3 border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition">
+                        다시 공부하기 (Review Training)
+                    </button>
+                    <button id="exit-btn" class="flex-1 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition shadow-md" onclick="window.location.reload();">
+                        처음으로 (Back to Start)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-4 border-t border-slate-700">
+        <div class="max-w-4xl mx-auto px-4 text-center text-xs space-y-1">
+            <p>© 2026 Food Safety Standards Australia Training Portal</p>
+            <p>Complies with FSANZ Standard 3.2.2 & Australian National WHS Regulations</p>
+        </div>
+    </footer>
+
+    <script>
+        // 46가지의 완벽히 분리된 주방/홀 전용 독자적 CSS 애니메이션 및 SVG 일러스트 도표 매핑
+        const visualTemplates = {
+            // PART 1 (t1 - t10, t51 추가)
+            t1: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative overflow-hidden shadow-md">
+                    <div class="w-16 h-16 shrink-0 text-sky-600">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M10,16 L32,16 A4,4 0 0,1 36,20 L36,24" stroke="#94a3b8" />
+                            <rect x="6" y="10" width="8" height="12" rx="1" fill="#cbd5e1" stroke="#64748b" />
+                            <path d="M22,46 C16,40 18,34 26,34 C30,34 32,38 34,42" stroke-linecap="round" class="anim-t1-rub" />
+                            <path d="M42,46 C48,40 46,34 38,34 C34,34 32,38 30,42" stroke-linecap="round" class="anim-t1-rub" style="animation-delay: 0.2s;" />
+                            <circle cx="28" cy="44" r="3" fill="#e0f2fe" stroke="#38bdf8" />
+                            <circle cx="36" cy="45" r="2" fill="#e0f2fe" stroke="#38bdf8" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center justify-center text-center relative flex-grow pl-2">
+                        <div class="w-1.5 h-6 bg-sky-400 anim-t1-water rounded-full"></div>
+                        <div class="w-1.5 h-6 bg-sky-300 anim-t1-water rounded-full" style="animation-delay:0.3s"></div>
+                        <span class="text-[9px] font-extrabold text-sky-800 mt-2">20s Friction</span>
+                    </div>
+                </div>
+            `,
+            t2: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative overflow-hidden shadow-md">
+                    <div class="w-14 h-16 shrink-0">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <rect x="14" y="8" width="36" height="32" rx="3" fill="#f1f5f9" stroke="#475569" />
+                            <rect x="22" y="32" width="20" height="4" rx="1" fill="#cbd5e1" stroke="#94a3b8" />
+                            <path d="M24,36 L24,52 L40,52 L40,36 Z" fill="#ffffff" stroke="#94a3b8" class="anim-t2-paper" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center justify-center text-center flex-grow pl-2">
+                        <i class="fa-solid fa-file-invoice text-2xl text-slate-500 animate-bounce"></i>
+                        <span class="text-[9px] font-bold text-slate-800 mt-1">Single-use paper</span>
+                        <span class="text-[8px] text-emerald-600 font-extrabold"><i class="fa-solid fa-circle-check"></i> Germ-Free</span>
+                    </div>
+                </div>
+            `,
+            t3: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative shadow-md">
+                    <div class="w-16 h-16 shrink-0 text-amber-500">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M32,10 C22,10 20,20 20,34 L14,42 L50,42 L44,34 C44,20 42,10 32,10 Z" fill="#fef08a" stroke="#d97706" class="anim-t3-bell" />
+                            <circle cx="32" cy="46" r="4" fill="#ca8a04" stroke="#d97706" />
+                            <path d="M32,6 L32,10" stroke="#d97706" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col text-left justify-center pl-2">
+                        <span class="text-[10px] font-extrabold text-sky-900"><i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i>RE-WASH</span>
+                        <span class="text-[8px] text-slate-500 leading-tight mt-1">After Trash, Toilet,<br>Raw Poultry, Smoke</span>
+                    </div>
+                </div>
+            `,
+            t51: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative overflow-hidden shadow-md">
+                    <div class="absolute top-1 flex flex-col items-center">
+                        <div class="w-0.5 h-4 bg-sky-400 anim-t1-water"></div>
+                    </div>
+                    <div class="mt-4 flex flex-col items-center gap-1 anim-t51-glove">
+                        <i class="fa-solid fa-hands-clapping text-3xl text-blue-500"></i>
+                        <span class="bg-emerald-400 text-white text-[8px] px-1.5 py-0.5 rounded font-bold">Wipe with Chux</span>
+                    </div>
+                    <span class="text-[9px] font-bold text-sky-950 mt-1">Wash or Clean Gloves</span>
+                </div>
+            `,
+            t4: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-10 h-10 bg-indigo-200 rounded-full flex items-center justify-center animate-ping absolute opacity-10"></div>
+                    <i class="fa-solid fa-soap text-3xl text-indigo-600 z-10 animate-bounce"></i>
+                    <span class="text-[9px] font-bold text-indigo-900 mt-2">Soap Only</span>
+                </div>
+            `,
+            t5: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <i class="fa-solid fa-head-side-cough text-3xl text-rose-600 anim-t5-cough"></i>
+                    <span class="text-[10px] font-extrabold text-rose-800 mt-2">Manager Report</span>
+                </div>
+            `,
+            t8: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-16 h-16 shrink-0">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M16,36 C16,20 48,20 48,36" fill="#e0f2fe" stroke="#0284c7" />
+                            <ellipse cx="32" cy="24" rx="16" ry="6" fill="#bae6fd" stroke="#0284c7" class="anim-t8-pulse" />
+                            <circle cx="32" cy="44" r="12" fill="#f8fafc" stroke="#64748b" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center justify-center flex-grow pl-2 text-center">
+                        <i class="fa-solid fa-circle-check text-xl text-blue-600"></i>
+                        <span class="text-[9px] font-bold text-blue-900 mt-1">Hairnet / Cap</span>
+                        <span class="text-[8px] text-slate-500">Prevent hair drops</span>
+                    </div>
+                </div>
+            `,
+            t9: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative shadow-md">
+                    <div class="w-16 h-16 shrink-0 text-slate-400">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="32" cy="32" r="14" fill="none" stroke="#94a3b8" stroke-width="4" />
+                            <polygon points="32,10 40,18 32,22 24,18" fill="#bae6fd" stroke="#0284c7" />
+                            <line x1="14" y1="14" x2="50" y2="50" stroke="#ef4444" stroke-width="4" class="anim-t9-blink" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col text-left justify-center pl-2">
+                        <span class="text-[9px] font-extrabold text-red-900"><i class="fa-solid fa-ban text-red-600 mr-1"></i>NO JEWELRY</span>
+                        <span class="text-[8px] text-slate-500 mt-1">No Polish, Rings,<br>Acrylic Nails, Watches</span>
+                    </div>
+                </div>
+            `,
+            t10: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative shadow-md">
+                    <div class="w-16 h-16 shrink-0">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12,44 C12,24 24,20 24,12 C24,12 28,12 28,16 C28,24 20,38 20,48" fill="#f8fafc" stroke="#cbd5e1" />
+                            <rect x="14" y="24" width="22" height="8" rx="2" fill="#3b82f6" stroke="#1d4ed8" class="anim-t10-wrap" />
+                            <circle cx="25" cy="28" r="1.5" fill="#1d4ed8" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center justify-center flex-grow pl-1 text-center">
+                        <span class="text-[10px] font-extrabold text-blue-900">BRIGHT BLUE</span>
+                        <span class="text-[8px] text-slate-500 mt-1">Waterproof Plaster<br>+ Wear Glove</span>
+                    </div>
+                </div>
+            `,
+
+            // PART 2 (t11 - t20)
+            t11: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-2xl flex items-center justify-around p-2 shrink-0 relative overflow-hidden shadow-md">
+                    <div class="w-4 h-16 bg-slate-200 rounded-full relative flex items-end overflow-hidden border border-slate-300">
+                        <div class="w-full bg-red-500 rounded-full anim-t11-mercury"></div>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[10px] font-extrabold text-red-600 animate-pulse">5°C ~ 60°C</span>
+                        <span class="text-[9px] font-bold text-slate-700">DANGER ZONE</span>
+                    </div>
+                </div>
+            `,
+            t12: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-10 h-10 rounded-full border-4 border-emerald-500 flex items-center justify-center">
+                        <span class="text-[9px] font-extrabold text-emerald-700 anim-t12-ticks">&lt; 2h</span>
+                    </div>
+                    <span class="text-[8px] font-bold text-slate-800 mt-1">Refrigerate OK</span>
+                </div>
+            `,
+            t13: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-10 h-10 rounded-full border-4 border-amber-500 flex items-center justify-center anim-t13-border">
+                        <span class="text-[9px] font-extrabold text-amber-700">2-4 Hours</span>
+                    </div>
+                    <span class="text-[8px] font-bold text-slate-800 mt-1">Use Immediately</span>
+                </div>
+            `,
+            t14: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-red-100 to-red-200 border border-red-300 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <i class="fa-solid fa-trash-can text-3xl text-red-600 anim-t14-fall"></i>
+                    <span class="text-[10px] font-extrabold text-red-800 mt-2">Discard (&gt;4h)</span>
+                </div>
+            `,
+            t15: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative shadow-md">
+                    <div class="w-16 h-16 shrink-0">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12,24 L52,24 L48,48 L16,48 Z" fill="#ffedd5" stroke="#ea580c" />
+                            <path d="M22,14 C22,10 26,10 26,14" stroke="#fdba74" class="anim-t15-steam" />
+                            <path d="M32,14 C32,10 36,10 36,14" stroke="#fdba74" class="anim-t15-steam" style="animation-delay:0.3s;" />
+                            <line x1="42" y1="8" x2="28" y2="34" stroke="#dc2626" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col items-center justify-center flex-grow text-center pl-2">
+                        <span class="text-[12px] font-mono font-extrabold text-orange-700 bg-white px-1.5 py-0.5 rounded border border-orange-200">75°C+</span>
+                        <span class="text-[8px] text-slate-500 mt-1">Reheat Limit: 1 Time</span>
+                    </div>
+                </div>
+            `,
+            t16: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-sky-100 to-sky-200 border border-sky-300 rounded-2xl flex flex-col justify-around items-stretch p-2 shrink-0 text-center shadow-md">
+                    <div class="flex justify-between items-center text-[8px] font-bold">
+                        <span class="text-sky-700">Cool down process</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden shadow-inner">
+                        <div class="h-full bg-emerald-500 anim-t16-slide"></div>
+                    </div>
+                    <span class="text-[9px] text-slate-700 font-extrabold">Stage 1 (2h) & Stage 2 (4h)</span>
+                </div>
+            `,
+            t17: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <i class="fa-solid fa-snowflake text-3xl text-indigo-600 anim-t17-drip"></i>
+                    <span class="text-[9px] font-bold text-indigo-950 mt-2">Lowest Shelf Thaw</span>
+                </div>
+            `,
+            t18: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-10 h-6 bg-slate-800 rounded relative flex items-center justify-center overflow-hidden anim-t18-spin">
+                        <i class="fa-solid fa-wave-square text-white text-[10px]"></i>
+                    </div>
+                    <span class="text-[9px] font-bold text-slate-800 mt-2">Cook Straight Away</span>
+                </div>
+            `,
+            t19: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 rounded-2xl flex items-center justify-center p-2 shrink-0 shadow-md">
+                    <div class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-cube text-2xl text-teal-400 anim-t19-shrink"></i>
+                        <span class="text-[11px] font-mono font-extrabold text-teal-800 bg-white px-2 py-0.5 rounded border">0.0°C</span>
+                    </div>
+                </div>
+            `,
+            t20: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <i class="fa-solid fa-rectangle-list text-2xl text-slate-600 anim-t20-refresh"></i>
+                    <span class="text-[9px] font-bold text-slate-800 mt-2">Twice Daily Logs</span>
+                </div>
+            `,
+
+            // PART 3 (t21 - t30)
+            t21: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-red-600 to-red-700 border border-red-800 rounded-2xl flex flex-col items-center justify-center p-2 text-white text-center shrink-0 shadow-inner relative overflow-hidden anim-bg-glow shadow-md">
+                    <i class="fa-solid fa-drumstick-bite text-2xl mb-1"></i>
+                    <span class="text-[10px] font-extrabold">RAW RED MEAT</span>
+                    <div class="absolute right-1 bottom-1 anim-t21-chop">
+                        <i class="fa-solid fa-knife text-xl text-slate-100"></i>
+                    </div>
+                </div>
+            `,
+            t22: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-amber-400 to-amber-500 border border-amber-600 rounded-2xl flex flex-col items-center justify-center p-2 text-slate-900 text-center shrink-0 shadow-inner relative overflow-hidden anim-bg-glow shadow-md">
+                    <i class="fa-solid fa-egg text-3xl mb-1"></i>
+                    <span class="text-[10px] font-extrabold">RAW POULTRY</span>
+                    <div class="absolute right-1 bottom-1 anim-t22-shield">
+                        <i class="fa-solid fa-shield text-xl text-amber-800"></i>
+                    </div>
+                </div>
+            `,
+            t23: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-blue-600 to-blue-700 border border-blue-800 rounded-2xl flex flex-col items-center justify-center p-2 text-white text-center shrink-0 shadow-inner relative overflow-hidden anim-bg-glow shadow-md">
+                    <i class="fa-solid fa-fish text-2xl mb-1 anim-t23-wag"></i>
+                    <span class="text-[10px] font-extrabold">RAW SEAFOOD</span>
+                </div>
+            `,
+            t24: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-emerald-600 to-emerald-700 border border-emerald-800 rounded-2xl flex flex-col items-center justify-center p-2 text-white text-center shrink-0 shadow-inner relative overflow-hidden anim-bg-glow shadow-md">
+                    <i class="fa-solid fa-carrot text-3xl mb-1 anim-t24-roll"></i>
+                    <span class="text-[10px] font-extrabold">VEGE & FRUITS</span>
+                </div>
+            `,
+            t25: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex flex-col items-center justify-center p-2 text-slate-800 text-center shrink-0 shadow-inner relative overflow-hidden anim-bg-glow shadow-md">
+                    <i class="fa-solid fa-bread-slice text-2xl text-slate-600 mb-1 anim-t25-slice"></i>
+                    <span class="text-[10px] font-extrabold">READY TO EAT</span>
+                </div>
+            `,
+            t26: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <div class="w-12 h-1 bg-red-500 rounded-full anim-t26-shake my-1"></div>
+                    <i class="fa-solid fa-board-slip text-3xl text-rose-600"></i>
+                    <span class="text-[9px] font-bold text-rose-950 mt-1">Replace Scratched</span>
+                </div>
+            `,
+            t27: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl flex items-center justify-between p-3 shrink-0 shadow-md relative overflow-hidden">
+                    <div class="w-16 h-20 shrink-0 text-slate-600 relative">
+                        <svg viewBox="0 0 32 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <rect x="2" y="2" width="28" height="60" rx="3" fill="#ffffff" stroke="#475569" />
+                            <line x1="2" y1="20" x2="30" y2="20" stroke="#94a3b8" />
+                            <line x1="2" y1="40" x2="30" y2="40" stroke="#94a3b8" />
+                        </svg>
+                        <div class="absolute left-1/2 top-4 w-1 h-12 bg-emerald-500 anim-t27-flow rounded-full transform -translate-x-1/2"></div>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow pl-2 text-[7px] text-left h-full">
+                        <div class="bg-emerald-500 text-white p-0.5 rounded text-center font-bold">Top: RTE (완제품)</div>
+                        <div class="bg-amber-500 text-white p-0.5 rounded text-center my-0.5">Mid: Vegetables</div>
+                        <div class="bg-red-500 text-white p-0.5 rounded text-center font-bold">Bot: Raw Meats</div>
+                    </div>
+                </div>
+            `,
+            t28: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex items-center justify-between p-3 shrink-0 relative overflow-hidden shadow-md">
+                    <div class="w-20 h-20 shrink-0 text-slate-600 relative">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polygon points="4,48 16,16 48,16 60,48" fill="#f8fafc" stroke="#475569" />
+                            <line x1="10" y1="32" x2="54" y2="32" stroke="#cbd5e1" stroke-dasharray="2,2" />
+                            <circle cx="20" cy="24" r="5" fill="#94a3b8" stroke="#475569" class="anim-t28-fifo" />
+                            <circle cx="44" cy="40" r="6" fill="#10b981" stroke="#047857" class="anim-t28-fifo" style="animation-delay: 0.5s;" />
+                        </svg>
+                        <span class="absolute top-1 left-2 text-[6px] text-slate-400">BACK</span>
+                        <span class="absolute bottom-1 right-2 text-[6px] text-emerald-600 font-bold">FRONT</span>
+                    </div>
+                    <div class="flex flex-col text-left justify-center flex-grow pl-1 leading-tight space-y-1">
+                        <span class="text-[9px] font-extrabold text-slate-800">FIFO ROTATION</span>
+                        <span class="text-[7px] text-rose-500 font-bold">◀ [Front] Old Stock</span>
+                        <span class="text-[7px] text-blue-500 font-bold">◀ [Back] New Stock</span>
+                    </div>
+                </div>
+            `,
+            t29: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-2xl flex items-center justify-between p-3 shrink-0 relative shadow-md">
+                    <div class="w-7 h-9 bg-slate-400 rounded relative">
+                        <div class="absolute top-0.5 left-0.5 w-6 h-1 bg-slate-500 anim-t29-lid"></div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+                    <div class="w-10 h-10 bg-emerald-500 rounded text-white text-[8px] flex items-center justify-center">Dated Plastic</div>
+                </div>
+            `,
+            t30: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-14 h-0.5 bg-slate-800 mb-1"></div>
+                    <div class="w-12 h-6 bg-slate-300 border border-slate-400 flex items-center justify-center text-[8px] font-extrabold anim-t30-wind">
+                        Elevated
+                    </div>
+                    <span class="text-[9px] font-bold text-amber-900 mt-2">&gt;15cm Clearance</span>
+                </div>
+            `,
+
+            // PART 4 (t31 - t40)
+            t31: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex justify-around items-center p-1 shrink-0 text-center text-[8px] font-extrabold relative overflow-hidden shadow-md">
+                    <div class="bg-indigo-200 p-1.5 rounded w-[65px] anim-t31-spin">
+                        <i class="fa-solid fa-soap text-indigo-700"></i><br>CLEAN
+                    </div>
+                    <div class="bg-emerald-200 p-1.5 rounded w-[65px]">
+                        <i class="fa-solid fa-sparkles text-emerald-700 animate-pulse"></i><br>SANITISED
+                    </div>
+                </div>
+            `,
+            t34: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <i class="fa-solid fa-temperature-arrow-up text-3xl text-indigo-600 anim-t34-pump"></i>
+                    <span class="text-[9px] font-extrabold text-indigo-950 mt-1">Wash 60°C / Rinse 82°C</span>
+                </div>
+            `,
+            t35: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative shadow-md">
+                    <div class="w-12 h-12 border-4 border-emerald-400 rounded-full flex items-center justify-center anim-t35-spin shadow">
+                        <i class="fa-solid fa-fan text-emerald-600 text-xl"></i>
+                    </div>
+                    <span class="text-[9px] font-bold text-emerald-950 mt-2">Air-Drying Racks</span>
+                </div>
+            `,
+            t36: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex items-center justify-center p-2 shrink-0 shadow-md">
+                    <div class="relative w-12 h-12 flex items-center justify-center">
+                        <i class="fa-solid fa-flask text-3xl text-slate-600 anim-t36-level"></i>
+                        <div class="absolute w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-slate-800 ml-1.5">Dilution Ratio</span>
+                </div>
+            `,
+            t38: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <i class="fa-solid fa-key text-2xl text-rose-600 anim-t38-turn"></i>
+                    <span class="text-[9px] font-bold text-rose-950 mt-2">Locked Cabinet</span>
+                </div>
+            `,
+            t40: `
+                <div class="w-[200px] h-[130px] bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 rounded-2xl flex items-center justify-between p-3 shrink-0 shadow-md">
+                    <div class="relative">
+                        <i class="fa-solid fa-door-closed text-3xl text-teal-600"></i>
+                        <div class="absolute top-1.5 left-1.5 w-4 h-4 bg-teal-300 opacity-60 rounded-full anim-t40-spray"></div>
+                    </div>
+                    <span class="text-[9px] font-bold text-teal-950 mt-2">Sanitise Handles</span>
+                </div>
+            `,
+
+            // PART 5 (t41 - t50)
+            t41: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md relative">
+                    <div class="w-16 h-16 shrink-0 text-amber-500 anim-t41-vibe">
+                        <svg viewBox="0 0 64 64" class="w-full h-full" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polygon points="32,8 56,52 8,52" fill="#fef08a" stroke="#d97706" stroke-width="3" />
+                            <line x1="32" y1="22" x2="32" y2="38" stroke="#ca8a04" stroke-width="4.5" />
+                            <circle cx="32" cy="46" r="3" fill="#ca8a04" />
+                        </svg>
+                    </div>
+                </div>
+            `,
+            t42: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <i class="fa-solid fa-utensils text-2xl text-emerald-600 anim-t42-pinch"></i>
+                    <span class="text-[8px] font-bold text-emerald-950 mt-1">Separate Gear</span>
+                </div>
+            `,
+            t43: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <i class="fa-solid fa-question text-2xl text-blue-600 anim-t43-jump"></i>
+                    <span class="text-[8px] font-bold text-blue-950 mt-1">Never Guess</span>
+                </div>
+            `,
+            t44: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center p-2 shrink-0 shadow-md">
+                    <div class="w-8 h-12 bg-red-500 rounded-md relative flex flex-col justify-around p-1">
+                        <div class="w-6 h-1.5 bg-white rounded animate-pulse"></div>
+                        <div class="w-1.5 h-5 bg-orange-400 rounded mx-auto anim-t44-inject"></div>
+                    </div>
+                </div>
+            `,
+            t45: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-amber-100 to-amber-200 border-2 border-amber-400 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 relative overflow-hidden shadow-md animate-bg-glow">
+                    <div class="anim-t45-sway">
+                        <svg class="w-8 h-10 text-amber-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 22h20L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/>
+                        </svg>
+                    </div>
+                    <span class="text-[8px] font-extrabold text-amber-800 uppercase mt-1">WET FLOOR</span>
+                </div>
+            `,
+            t46: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <i class="fa-solid fa-wind text-2xl text-emerald-500 anim-t46-wind"></i>
+                    <span class="text-[8px] font-bold text-emerald-950 mt-2">Wait 100% Dry</span>
+                </div>
+            `,
+            t47: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <div class="anim-t47-down">
+                        <i class="fa-solid fa-knife text-2xl text-slate-600" style="transform: rotate(180deg)"></i>
+                    </div>
+                    <span class="text-[8px] font-bold text-slate-800 mt-2">Blade Down</span>
+                </div>
+            `,
+            t48: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-orange-50 to-orange-100 text-center rounded-2xl flex flex-col items-center justify-center p-2 shrink-0 shadow-sm overflow-hidden font-normal text-left">
+                    <div class="relative w-12 h-10 flex items-center justify-center anim-t48-heat">
+                        <i class="fa-solid fa-fire text-3xl text-orange-600"></i>
+                        <div class="absolute top-0 right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
+                    </div>
+                    <span class="text-[8px] font-bold text-orange-900 mt-2">Active Heating</span>
+                </div>
+            `,
+            t49: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md animate-pulse">
+                    <i class="fa-solid fa-person-walking-luggage text-2xl text-slate-600 anim-t49-squat"></i>
+                    <span class="text-[8px] font-bold text-slate-800 mt-2">Bend Knees Lift</span>
+                </div>
+            `,
+            t50: `
+                <div class="w-[180px] h-[130px] bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-2xl flex flex-col items-center justify-center p-2 text-center shrink-0 shadow-md">
+                    <div class="relative">
+                        <i class="fa-solid fa-bug text-2xl text-red-600 anim-t50-bug"></i>
+                        <i class="fa-solid fa-circle-ban text-3xl text-rose-500 absolute left-[-4px] top-[-3px] opacity-70"></i>
+                    </div>
+                    <span class="text-[10px] font-bold text-red-950 mt-2">Zero Vermin</span>
+                </div>
+            `
+        };
+
+        // 45개 세부 마스터 데이터베이스 (7번 격리 규정 영구 삭제 완료)
+        const slides = [
+            {
+                title: "PART 1: Personal Hygiene (Items 1 - 2)",
+                icon: "fa-user-doctor",
+                items: [
+                    {
+                        subtitle: "Handwashing Duration <span class='text-emerald-700 text-xs block md:inline'>[올바른 손 씻기 20초 원칙]</span>",
+                        desc: "Wet hands with warm running water (min 40°C), apply soap, and rub all surfaces—including wrists, between fingers, and under nails—for <b>at least 20 seconds</b>. Physical friction is necessary to dissolve grease and loosen transient foodborne pathogens.",
+                        imageDesc: "따뜻한 물 비누칠 부위 표기 및 타이머",
+                        imageTag: "t1"
+                    },
+                    {
+                        subtitle: "Correct Hand Drying Protocol <span class='text-emerald-700 text-xs block md:inline'>[핸드 드라이 및 교차오염 방지]</span>",
+                        desc: "Dry hands thoroughly using a <b>single-use paper towel</b>. Damp hands transfer bacteria 1,000 times faster than dry hands. Never wipe your hands on cloth tea towels or your apron, as this causes immediate re-contamination.",
+                        imageDesc: "일회용 종이타월 건조 가이드",
+                        imageTag: "t2"
+                    }
+                ]
+            },
+            {
+                title: "PART 2: Personal Hygiene (Items 3 - 4)",
+                icon: "fa-user-doctor",
+                items: [
+                    {
+                        subtitle: "Mandatory Handwashing Triggers <span class='text-emerald-700 text-xs block md:inline'>[손을 무조건 다시 씻어야 하는 시점]</span>",
+                        desc: "You must wash hands before starting work, before touching food, and immediately after using the toilet, touching your face, coughing, handling raw meat/eggs, smoking, touching garbage, or handling money.",
+                        imageDesc: "화장실, 흡연, 쓰레기통 작업 후 세척 경고",
+                        imageTag: "t3"
+                    },
+                    {
+                        subtitle: "Glove Hygiene & Cross-Contamination Prevention <span class='text-emerald-700 text-xs block md:inline'>[일회용 장갑 위생 및 장비 오염 방지]</span>",
+                        desc: "When wearing disposable gloves, never touch raw foods and then handle clean kitchen utensils, equipment, or display fridges directly. You must <b>frequently wash gloved hands under running water</b> or <b>wipe food residues off with a sanitised towel (Chux)</b>. Always change to fresh gloves when switching between raw and cooked food.",
+                        imageDesc: "흐르는 물에 장갑 세척 및 Chux 타올 닦기 시뮬레이션",
+                        imageTag: "t51"
+                    }
+                ]
+            },
+            {
+                title: "PART 3: Personal Hygiene (Items 5 - 6)",
+                icon: "fa-user-doctor",
+                items: [
+                    {
+                        subtitle: "Hand Sanitiser Misconception <span class='text-emerald-700 text-xs block md:inline'>[손소독제에 대한 잘못된 인식]</span>",
+                        desc: "Alcohol sanitisers <b>cannot replace soap and water</b>. They are completely ineffective on greasy, moisture-laden, or food-soiled hands. Wash with soap first, dry fully, then apply sanitiser for an extra barrier.",
+                        imageDesc: "비누 세척과 소독제 주입의 순서 대조",
+                        imageTag: "t4"
+                    },
+                    {
+                        subtitle: "Reporting Infectious Illnesses <span class='text-emerald-700 text-xs block md:inline'>[감염성 법정 질병 매장 보고 의무]</span>",
+                        desc: "Under FSANZ 3.2.2, you have a strict <b>legal duty</b> to report to your manager if you are diagnosed with or carry a foodborne illness (Salmonella, Norovirus, E. coli) or have symptoms like diarrhea, vomiting, or fever.",
+                        imageDesc: "질병 체크리스트 및 보고 절차",
+                        imageTag: "t5"
+                    }
+                ]
+            },
+            {
+                title: "PART 4: Personal Hygiene (Items 7 - 8)",
+                icon: "fa-user-doctor",
+                items: [
+                    {
+                        subtitle: "Hair Containment <span class='text-emerald-700 text-xs block md:inline'>[머리카락 보호망 착용]</span>",
+                        desc: "Tie long hair back and cover it securely with a hairnet, cap, or visor to prevent physical hair drops and micro-particles from entering food preparation areas.",
+                        imageDesc: "헤어캡 착용 필수 가이드",
+                        imageTag: "t8"
+                    },
+                    {
+                        subtitle: "Strict Jewelry & Nail Restrictions <span class='text-emerald-700 text-xs block md:inline'>[매장 내 액세서리 및 네일 금지]</span>",
+                        desc: "Nail polish, gel nails, rings, watches, and bracelets harbor massive bacterial colonies. <b>Only a plain, stone-free wedding band is permitted</b> in prep zones. Fingernails must be short, neat, and unpolished.",
+                        imageDesc: "보석류 금지 및 민무늬 가락지만 허용",
+                        imageTag: "t9"
+                    }
+                ]
+            },
+            {
+                title: "PART 5: Personal Hygiene & Temp (Items 9 - 10)",
+                icon: "fa-user-doctor",
+                items: [
+                    {
+                        subtitle: "Cuts, Wounds & Bright Bandages <span class='text-emerald-700 text-xs block md:inline'>[상처 보호를 위한 청색 방수 밴드]</span>",
+                        desc: "Seal cuts or burns on hands with a waterproof, highly visible <b>bright blue bandage</b> (blue does not occur naturally in food, making it easy to spot). A disposable clean glove must be worn over the bandage.",
+                        imageDesc: "청색 방수 밴드 및 니트릴 장갑 장착",
+                        imageTag: "t10"
+                    },
+                    {
+                        subtitle: "The Temperature Danger Zone <span class='text-emerald-700 text-xs block md:inline'>[식중독균 증식 온도의 위험 구간]</span>",
+                        desc: "The Danger Zone is between <b>5°C and 60°C</b>, where harmful bacteria multiply exponentially. Cold food must be kept strictly at/below <b>5°C</b>, and hot hot-holding food must stay at/above <b>60°C</b>.",
+                        imageDesc: "온도 눈금자 위험 구역 가이드",
+                        imageTag: "t11"
+                    }
+                ]
+            },
+            {
+                title: "PART 6: Temperature Control (Items 11 - 12)",
+                icon: "fa-temperature-half",
+                items: [
+                    {
+                        subtitle: "The 2-Hour / 4-Hour Rule: Under 2 Hours <span class='text-emerald-700 text-xs block md:inline'>[실온 노출 2시간 이내의 프로토콜]</span>",
+                        desc: "If potentially hazardous food (PHF) has been held in the danger zone for <b>under 2 hours</b>, it is completely safe to be eaten immediately, cooked further, or returned to the fridge (below 5°C) for later use.",
+                        imageDesc: "2시간 이내 식품 냉장실 컴백 허용",
+                        imageTag: "t12"
+                    },
+                    {
+                        subtitle: "The 2-Hour / 4-Hour Rule: 2 to 4 Hours <span class='text-emerald-700 text-xs block md:inline'>[실온 노출 2~4시간 사이의 조치]</span>",
+                        desc: "If PHF has been in the danger zone for <b>between 2 and 4 hours</b>, bacterial incubation has spiked. This food <b>must be consumed or cooked immediately</b>. It is illegal to re-refrigerate it.",
+                        imageDesc: "재냉장 절대 금지 및 즉시 소비",
+                        imageTag: "t13"
+                    }
+                ]
+            },
+            {
+                title: "PART 7: Temperature Control (Items 13 - 14)",
+                icon: "fa-temperature-half",
+                items: [
+                    {
+                        subtitle: "The 2-Hour / 4-Hour Rule: Over 4 Hours <span class='text-emerald-700 text-xs block md:inline'>[실온 노출 4시간 초과 시 무조건 폐기]</span>",
+                        desc: "If PHF remains in the danger zone for <b>more than 4 hours</b>, it turns highly toxic. Pathogens create heat-stable toxins that cooking cannot destroy. This food <b>must be thrown away immediately</b>.",
+                        imageDesc: "4시간 초과 식품 쓰레기통 폐기",
+                        imageTag: "t14"
+                    },
+                    {
+                        subtitle: "Strict Reheating Standard <span class='text-emerald-700 text-xs block md:inline'>[음식 재가열 시 중심 온도 기준]</span>",
+                        desc: "Previously cooked food must be reheated rapidly so its core temperature reaches <b>at least 75°C</b> within 2 hours to destroy active vegetative bacteria. Reheating is allowed <b>only once</b>; throw out leftovers.",
+                        imageDesc: "탐침 온도계 중심부 75도 계측",
+                        imageTag: "t15"
+                    }
+                ]
+            },
+            {
+                title: "PART 8: Temperature Control (Items 15 - 16)",
+                icon: "fa-temperature-half",
+                items: [
+                    {
+                        subtitle: "The 2-Step Rapid Cooling Process <span class='text-emerald-700 text-xs block md:inline'>[뜨거운 음식의 2단계 급속 냉각법]</span>",
+                        desc: "Reduce hot food temperature from <b>60°C to 21°C within 2 hours</b>, and then from <b>21°C to 5°C within the next 4 hours</b>. Slow cooling germ인화 bacterial spores. Use shallow pans or ice baths.",
+                        imageDesc: "단계별 급속 온도 다운 타임라인",
+                        imageTag: "t16"
+                    },
+                    {
+                        subtitle: "Safe Defrosting in the Coolroom <span class='text-emerald-700 text-xs block md:inline'>[안전한 냉장 해동 및 육즙 차단]</span>",
+                        desc: "Thawing frozen food on open kitchen tables is strictly prohibited. You must thaw items slowly on the lowest shelves of the coolroom (below 5°C) inside a covered, deep container to catch raw drips.",
+                        imageDesc: "냉장고 하단 밀봉 용기 해동",
+                        imageTag: "t17"
+                    }
+                ]
+            },
+            {
+                title: "PART 9: Temperature Control (Items 17 - 18)",
+                icon: "fa-temperature-half",
+                items: [
+                    {
+                        subtitle: "Microwave Thawing Restrictions <span class='text-emerald-700 text-xs block md:inline'>[전자레인지 해동 시 예외 수칙]</span>",
+                        desc: "Thawing food in a microwave is permitted <b>only if the food is cooked immediately afterwards</b>. Microwave heating is uneven, creating dangerous 'hot spots' that ignite rapid localized bacterial growth.",
+                        imageDesc: "레인지 해동 직후 즉시 가열 유기성",
+                        imageTag: "t18"
+                    },
+                    {
+                        subtitle: "Daily Thermometer Calibration <span class='text-emerald-700 text-xs block md:inline'>[탐침 온도계 영점 조정 및 얼음물법]</span>",
+                        desc: "Probe thermometers must be calibrated daily to maintain an accuracy of ±1°C. Use the <b>Ice Slurry Method</b> (crushed ice and water mix should read 0.0°C). Record results on calibration logs.",
+                        imageDesc: "얼음물을 활용한 0.0도 보정",
+                        imageTag: "t19"
+                    }
+                ]
+            },
+            {
+                title: "PART 10: Temp & Cross-Contamination (Items 19 - 20)",
+                icon: "fa-temperature-half",
+                items: [
+                    {
+                        subtitle: "Mandatory Temperature Log Sheets <span class='text-emerald-700 text-xs block md:inline'>[냉장/냉동고 일일 온도 기록 의무]</span>",
+                        desc: "To prove compliance, coolrooms, freezers, and hot cabinets must have their temperatures checked and recorded in a logbook <b>at least twice daily</b>. Any deviations must trigger instant corrections.",
+                        imageDesc: "온도 체크 리지스트 표 작성 가이드",
+                        imageTag: "t20"
+                    },
+                    {
+                        subtitle: "Red Board: Raw Red Meats <span class='text-emerald-700 text-xs block md:inline'>[빨간색 도마: 익히지 않은 적색육 전용]</span>",
+                        desc: "The <b>Red cutting board</b> is used exclusively for raw red meats (beef, pork, lamb). This restricts hazardous enteric bacteria like <i>E. coli</i> from transferring to ready-to-eat ingredients.",
+                        imageDesc: "생고기 가공 전용  레드 도마",
+                        imageTag: "t21"
+                    }
+                ]
+            },
+            {
+                title: "PART 11: Cross-Contamination (Items 21 - 22)",
+                icon: "fa-shield-halved",
+                items: [
+                    {
+                        subtitle: "Yellow Board: Raw Poultry <span class='text-emerald-700 text-xs block md:inline'>[노란색 도마: 날 가금류/생닭 전용]</span>",
+                        desc: "The <b>Yellow cutting board</b> is reserved solely for raw poultry. Raw chicken carries a high level of <i>Salmonella</i> and <i>Campylobacter</i>. Keeping poultry completely isolated here is critical.",
+                        imageDesc: "날 닭고기 전용 옐로 도마",
+                        imageTag: "t22"
+                    },
+                    {
+                        subtitle: "Blue Board: Raw Seafood <span class='text-emerald-700 text-xs block md:inline'>[파란색 도마: 생선 및 해산물 가공 전용]</span>",
+                        desc: "The <b>Blue cutting board</b> is designated strictly for raw fish, shellfish, and seafood. This separates marine allergens and dangerous histamine-producing bacteria from other food groups.",
+                        imageDesc: "해산물 처리용 블루 도마",
+                        imageTag: "t23"
+                    }
+                ]
+            },
+            {
+                title: "PART 12: Cross-Contamination (Items 23 - 24)",
+                icon: "fa-shield-halved",
+                items: [
+                    {
+                        subtitle: "Green Board: Fruits & Vegetables <span class='text-emerald-700 text-xs block md:inline'>[초록색 도마: 과일, 야채, 샐러드 전용]</span>",
+                        desc: "The <b>Green cutting board</b> is used solely for fresh produce, fruits, and vegetables. Since vegetables are often eaten raw, keeping this board free of meat residue stops severe contamination.",
+                        imageDesc: "야채 손질 그린 도마",
+                        imageTag: "t24"
+                    },
+                    {
+                        subtitle: "White Board: Cooked & Ready-to-Eat <span class='text-emerald-700 text-xs block md:inline'>[흰색 도마: 조리 완료 식품 및 유제품 전용]</span>",
+                        desc: "The <b>White cutting board</b> is for cooked foods, bakery, bread, and dairy. No raw meat, poultry, or unwashed veges may ever touch this board. Keep it clean for immediate serving.",
+                        imageDesc: "조리 완제품용 화이트 도마",
+                        imageTag: "t25"
+                    }
+                ]
+            },
+            {
+                title: "PART 13: Cross-Contamination (Items 25 - 26)",
+                icon: "fa-shield-halved",
+                items: [
+                    {
+                        subtitle: "Chopping Board Maintenance <span class='text-emerald-700 text-xs block md:inline'>[노후 도마 점검 및 즉각 교체 원칙]</span>",
+                        desc: "Inspect boards daily. Deeply scored, cracked, or warped boards must be thrown out immediately. Microscopic bacteria hide deep inside knife cuts, escaping chemical sanitisers.",
+                        imageDesc: "칼자국 가득한 노후 도마 폐기",
+                        imageTag: "t26"
+                    },
+                    {
+                        subtitle: "The Vertical Storage Rule <span class='text-emerald-700 text-xs block md:inline'>[냉장고 상하 수직 적재 원칙]</span>",
+                        desc: "Store items vertically inside the refrigerator: <b>Ready-to-eat (RTE) foods on top shelves</b>, washed produce below them, and raw poultry/meats at the very bottom shelf. This stops raw contaminated juices from dripping down.",
+                        imageDesc: "상단 완제품에서 하단 생고기로 흐르는 수직 정렬 동선 가이드",
+                        imageTag: "t27"
+                    }
+                ]
+            },
+            {
+                title: "PART 14: Cross-Contamination (Items 27 - 28)",
+                icon: "fa-shield-halved",
+                items: [
+                    {
+                        subtitle: "First In, First Out (FIFO) Protocol <span class='text-emerald-700 text-xs block md:inline'>[선입선출 원칙 및 안쪽-바깥 정렬]</span>",
+                        desc: "Practice strict stock rotation on the shelves. Always pull older stock (Old Stock) to the **Front** of the shelf for immediate use, and place newly delivered stock (New Stock) at the **Back** of the shelf.",
+                        imageDesc: "냉장고 선반 안쪽(New)과 바깥 앞쪽(Old)의 교차 동선 유도도",
+                        imageTag: "t28"
+                    },
+                    {
+                        subtitle: "Decanting Open Canned Foods <span class='text-emerald-700 text-xs block md:inline'>[오픈된 캔 식품의 전용 밀폐 용기 이석]</span>",
+                        desc: "Never store opened metal tin cans inside the coolroom. Oxygen exposure causes tin oxidation, releasing toxic metallic ions into food. Decant items into food-grade plastic containers with a date label.",
+                        imageDesc: "개봉 통조림 이석 지침",
+                        imageTag: "t29"
+                    }
+                ]
+            },
+            {
+                title: "PART 15: Cross-Contamination & Clean (Items 29 - 30)",
+                icon: "fa-shield-halved",
+                items: [
+                    {
+                        subtitle: "Dry Store Elevation Standards <span class='text-emerald-700 text-xs block md:inline'>[창고 식자재 바닥 15cm 이격 보관]</span>",
+                        desc: "Store dry foods (rice, flour) in pest-proof airtight containers. They must be placed on dry shelving elevated <b>at least 15cm off the floor</b> and 5cm off walls to stop pests and moisture leaks.",
+                        imageDesc: "바닥 15cm 이상 격리 선반",
+                        imageTag: "t30"
+                    },
+                    {
+                        subtitle: "Cleaning vs. Sanitising Definitions <span class='text-emerald-700 text-xs block md:inline'>[세척(청소)과 살균소독의 물리적 차이]</span>",
+                        desc: "<b>Cleaning</b> removes visible dirt and grease using warm water and detergent. <b>Sanitising</b> reduces microscopic bacteria to safe public health levels using chemicals or extreme heat. You cannot sanitise a dirty surface.",
+                        imageDesc: "세성 세척과 화학 소독 스프레이 분사 대조",
+                        imageTag: "t31"
+                    }
+                ]
+            },
+            {
+                title: "PART 16: Cleaning & Chemical (Items 31 - 32)",
+                icon: "fa-spray-can-sparkles",
+                items: [
+                    {
+                        subtitle: "The Manual Three-Sink Method <span class='text-emerald-700 text-xs block md:inline'>[식기 수동 세척의 3단계 싱크 원칙]</span>",
+                        desc: "Use three sinks in sequence: <b>Sink 1: Wash</b> (scrub with water at 45°C-50°C + detergent); <b>Sink 2: Rinse</b> (rinse soap with clean warm water); <b>Sink 3: Sanitise</b> (soak in hot water at 77°C for 30s or chemical sanitiser).",
+                        imageDesc: "1세척, 2행굼, 3소독 정렬 싱크대",
+                        imageTag: "t32"
+                    },
+                    {
+                        subtitle: "The Air-Drying Mandate <span class='text-emerald-700 text-xs block md:inline'>[식기 및 도구의 자연 건조 강제 수칙]</span>",
+                        desc: "Leave all sanitised plates, knives, and cutting boards to <b>air-dry completely</b> on wire racks. Never wipe items with cloth tea towels, as damp fabrics harbor bacteria and spread cross-contamination.",
+                        imageDesc: "건조대 자연 건조 모식도",
+                        imageTag: "t35"
+                    }
+                ]
+            },
+            {
+                title: "PART 17: Cleaning & Chemical (Items 33 - 34)",
+                icon: "fa-spray-can-sparkles",
+                items: [
+                    {
+                        subtitle: "Safe Chemical Dilution <span class='text-emerald-700 text-xs block md:inline'>[화학 세제 희석 비율 엄수 가이드]</span>",
+                        desc: "Dilute cleaning chemicals to the exact ratio specified by the maker. Under-diluted chemicals fail to sanitise, leaving germs alive. Over-diluting wastes money and leaves chemical toxic film on food benches.",
+                        imageDesc: "계량 원액 비율 가이드",
+                        imageTag: "t36"
+                    },
+                    {
+                        subtitle: "Safety Data Sheets (SDS) <span class='text-emerald-700 text-xs block md:inline'>[물질안전보건자료 바인더 현장 비치]</span>",
+                        desc: "Keep a physical or digital Safety Data Sheet (SDS) binder for every chemical on-site. The SDS details hazard classes, PPE protective needs, and crucial first-aid steps for accidental skin/eye contact.",
+                        imageDesc: "화학 안전 정보 보존 바인더",
+                        imageTag: "t37"
+                    }
+                ]
+            },
+            {
+                title: "PART 18: Cleaning & Chemical (Items 35 - 36)",
+                icon: "fa-spray-can-sparkles",
+                items: [
+                    {
+                        subtitle: "Lockable Chemical Storage <span class='text-emerald-700 text-xs block md:inline'>[화학 물질 자물쇠 시건 수납함 격리]</span>",
+                        desc: "Store all cleaning chemicals, commercial detergents, and spray bottles inside a <b>dedicated, lockable storage cabinet</b>. Locate it completely away from food zones, dry pantries, or packaging storage.",
+                        imageDesc: "열쇠로 잠긴 전용 화학 수납함",
+                        imageTag: "t38"
+                    },
+                    {
+                        subtitle: "High-Touch Surface Disinfection <span class='text-emerald-700 text-xs block md:inline'>[스태프 다중 접촉 표면 집중 소독]</span>",
+                        desc: "Identify and sanitise high-touch surfaces multiple times per shift. These include coolroom handles, microwave buttons, oven dials, ice scoops, waste bin lids, tap faucets, and POS screens.",
+                        imageDesc: "손때 묻는 주요 손잡이 집중 살균",
+                        imageTag: "t40"
+                    }
+                ]
+            },
+            {
+                title: "PART 19: Allergens & Safety (Items 37 - 38)",
+                icon: "fa-triangle-exclamation",
+                items: [
+                    {
+                        subtitle: "Mandatory Allergen Declaration <span class='text-emerald-700 text-xs block md:inline'>[호주 법정 10대 알레르기 유발 성분 표기]</span>",
+                        desc: "You must declare if any of the 10 major allergens are in menu items: <b>peanuts, tree nuts, cow’s milk, eggs, fish, crustacea, sesame, soy, wheat/gluten, and lupin</b>. They cause 90% of anaphylaxis.",
+                        imageDesc: "호주 10대 알레르기 식품 일람 포스터",
+                        imageTag: "t41"
+                    },
+                    {
+                        subtitle: "Preventing Allergen Cross-Contact <span class='text-emerald-700 text-xs block md:inline'>[알레르기 주문 조리 도구 물리적 격리]</span>",
+                        desc: "Microscopic traces of allergens can be fatal. When making an allergen-free order, use pristine clean, sanitised pans and knives. Deep fryers do not destroy allergens; proteins stay active in hot oil.",
+                        imageDesc: "알레르기 전용 조리구역 격리",
+                        imageTag: "t42"
+                    }
+                ]
+            },
+            {
+                title: "PART 20: Allergens & Safety (Items 39 - 40)",
+                icon: "fa-triangle-exclamation",
+                items: [
+                    {
+                        subtitle: "Responding to Customer Inquiries <span class='text-emerald-700 text-xs block md:inline'>[알레르기 문의 대응 및 임의 판단 금지]</span>",
+                        desc: "If a customer asks about allergen ingredients, <b>never guess</b>. Check the venue's master matrix, consult the head chef, or read the packaging. If cross-contact is possible, inform the guest transparently.",
+                        imageDesc: "마스터 알레르기 매트릭스 책자 대조",
+                        imageTag: "t43"
+                    },
+                    {
+                        subtitle: "Anaphylaxis Emergency Protocol <span class='text-emerald-700 text-xs block md:inline'>[아나필락시스 쇼크 발생 및 응급 000 절차]</span>",
+                        desc: "Anaphylaxis is life-threatening. Symptoms include breathing difficulty, tongue swelling, or hives. If suspected, <b>immediately call Emergency Services (000)</b> and administer an EpiPen injection into thighs.",
+                        imageDesc: "에피펜 허벅지 투입 및 000 긴급 연결",
+                        imageTag: "t44"
+                    }
+                ]
+            },
+            {
+                title: "PART 21: Allergens & Safety (Items 41 - 42)",
+                icon: "fa-triangle-exclamation",
+                items: [
+                    {
+                        subtitle: "Immediate Wet Floor Signage <span class='text-emerald-700 text-xs block md:inline'>[바닥 액체 유입 즉시 미끄럼 경고판 배치]</span>",
+                        desc: "Slips and falls are top safety liabilities in Australia. If there is a spill, leak, or if you are active-mopping, you must <b>immediately place yellow, double-sided 'Wet Floor' signs</b> at all entry paths.",
+                        imageDesc: "노란색 A형 미끄럼 주의 표지판",
+                        imageTag: "t45"
+                    },
+                    {
+                        subtitle: "Wet Floor Sign Removal Policy <span class='text-emerald-700 text-xs block md:inline'>[경고 표지판의 조기 철거 금지 원칙]</span>",
+                        desc: "Never remove a 'Wet Floor' sign early. The warning sign must stay up <b>until the floor surface is 100% dry</b>. Walking on half-dry damp tiles still carries high slip hazards under WHS rules.",
+                        imageDesc: "물기가 100% 마른 뒤 안전하게 경고판을 폴딩하는 모습",
+                        imageTag: "t46"
+                    }
+                ]
+            },
+            {
+                title: "PART 22: Allergens & Safety (Items 43 - 44)",
+                icon: "fa-triangle-exclamation",
+                items: [
+                    {
+                        subtitle: "Safe Knife Handling Techniques <span class='text-emerald-700 text-xs block md:inline'>[식칼 소지 이동 시 칼끝 하향 하방 규칙]</span>",
+                        desc: "When walking with a knife, hold it by your side with the blade pointed straight down and the edge backward. Call out 'Knife behind' in tight aisles. Never attempt to catch a falling knife; step back.",
+                        imageDesc: "칼끝 아래로 잡고 보행하는 모습",
+                        imageTag: "t47"
+                    },
+                    {
+                        subtitle: "Burns & Hot Oil Prevention <span class='text-emerald-700 text-xs block md:inline'>[튀김기 고온 기름 수분 폭발 예방]</span>",
+                        desc: "Fryer oil (170°C-190°C) causes deep third-degree burns. Fryer baskets must be <b>completely dry</b> before entering hot oil. Water in hot oil triggers sudden boiling explosions and violent splattering.",
+                        imageDesc: "얼어있거나 물이 묻은 음식을 튀김기에 넣어 기름 튀는 위험성 표시",
+                        imageTag: "t48"
+                    }
+                ]
+            },
+            {
+                title: "PART 23: Allergens & Safety (Items 45 - 46)",
+                icon: "fa-triangle-exclamation",
+                items: [
+                    {
+                        subtitle: "Safe Manual Lifting (WHS) <span class='text-emerald-700 text-xs block md:inline'>[자재 박스 하역 시 무릎 스쿼트 자세]</span>",
+                        desc: "When lifting heavy boxes or bags of flour, use correct ergonomic techniques: stand close, feet apart, bend at the knees, keep your back straight, and lift with leg power. Do not twist your spine.",
+                        imageDesc: "허리 직립 스쿼트 양손 수하물 리프팅",
+                        imageTag: "t49"
+                    },
+                    {
+                        subtitle: "Pest Exclusion & Reporting <span class='text-emerald-700 text-xs block md:inline'>[해충 차단 조치 및 해충 발견 즉시 보고]</span>",
+                        desc: "Pests drop dangerous bacteria like Salmonella. Keep kitchen doors shut and flyscreens intact. Inspect incoming dry stock boxes for droppings or chew marks. Log any sightings in the pest register.",
+                        imageDesc: "주방 방충망 밀폐 장치",
+                        imageTag: "t50"
+                    }
+                ]
+            }
+        ];
+
+        // 15가지 전술적 평가 퀴즈 (변동 없음)
+        const quizData = [
+            {
+                question: "According to Australian Food Safety Standards, what is the exact range of the 'Temperature Danger Zone' where foodborne bacteria multiply most rapidly?",
+                options: ["0°C to 100°C", "5°C to 60°C", "10°C to 50°C", "4°C to 75°C"],
+                answer: 1,
+                explanation: "Under FSANZ Standard 3.2.2, the Temperature Danger Zone is 5°C to 60°C. Cold foods must be stored below 5°C, and hot foods above 60°C to limit bacterial growth."
+            },
+            {
+                question: "Which color-coded chopping board is standard in Australia for handling raw poultry (chicken, turkey, duck)?",
+                options: ["Red", "Yellow", "Blue", "Green"],
+                answer: 1,
+                explanation: "Yellow is designated for raw poultry. Red is used for raw red meat, blue for raw seafood, and green for fresh fruits and vegetables to prevent cross-contamination."
+            },
+            {
+                question: "According to the '2-Hour / 4-Hour Rule', what must be done with potentially hazardous food that has been left in the Temperature Danger Zone for more than 4 hours?",
+                options: ["Reheat it to above 75°C and serve it to customers.", "Put it back in the coolroom for use on the next day.", "Discard it immediately.", "Smell it, and if it smells fine, continue to use it."],
+                answer: 2,
+                explanation: "Any potentially hazardous food left in the danger zone for more than 4 hours is unsafe and must be thrown out. Reheating does not destroy heat-resistant toxins produced by some bacteria."
+            },
+            {
+                question: "What is the correct storage order (from top to bottom) in a commercial kitchen refrigerator to prevent cross-contamination?",
+                options: ["Raw chicken -> Raw beef -> Cooked rice", "Ready-to-eat foods (cooked meals) -> Fresh vegetables -> Raw meats & poultry", "Unwashed vegetables -> Ready-to-eat foods -> Raw fish", "The order does not matter as long as containers have lids."],
+                answer: 1,
+                explanation: "Ready-to-eat (RTE) foods go on top, followed by washed produce, and raw meats/poultry must go at the very bottom to prevent raw juices from dripping onto other food."
+            },
+            {
+                question: "Which of the following defrosting (thawing) methods is NOT allowed under Australian Food Safety Standards?",
+                options: ["Placing the frozen food in the coolroom/fridge (below 5°C) a day in advance.", "Using the microwave's defrost function if cooking immediately.", "Leaving the frozen food on the kitchen bench at room temperature.", "Thawing the frozen food directly during the cooking process (e.g., deep-frying, boiling)."],
+                answer: 2,
+                explanation: "Leaving food on the bench at room temperature allows the outer layers to reach the Temperature Danger Zone (5°C to 60°C) while the core is still frozen, leading to rapid bacterial growth."
+            },
+            {
+                question: "If a kitchen staff member develops symptoms of diarrhea or vomiting, what is the mandatory action under food safety regulations?",
+                options: ["Wear a mask and gloves to continue working since the restaurant is busy.", "Immediately report the illness to the manager and stay away from food-handling duties until at least 48 hours after symptoms have stopped.", "Take a painkiller or anti-diarrheal medicine and work only in the dishwashing area.", "Do not say anything to avoid losing sick leave wages."],
+                answer: 1,
+                explanation: "Staff with gastrointestinal illnesses pose high risks of foodborne disease outbreaks. They must be excluded from food handling and can only return 48 hours after symptoms completely clear."
+            },
+            {
+                question: "Which of the following statements correctly describes 'Cleaning' and 'Sanitising'?",
+                options: ["Washing with standard soap and hot water alone achieves complete sanitisation.", "Cleaning (removing dirt and grease with detergent) must be done first so that the sanitiser (bacterial reduction) can work effectively.", "Sanitising should be done on dirty surfaces first, followed by cleaning.", "Wiping a greasy table with a dry sanitised cloth replaces the need for cleaning."],
+                answer: 1,
+                explanation: "Sanitisers cannot penetrate grease, fat, or dirt layers. You must clean the surface first with soap/detergent and rinse, and then apply sanitiser to destroy remaining pathogens."
+            },
+            {
+                question: "A liquid spill occurs on the front-of-house (FOH) hall floor. Under WHS regulations, what is the correct immediate action?",
+                options: ["Wipe it quickly with a wet mop and let it air-dry without warning signs.", "Set up a yellow 'Wet Floor' sign immediately, clean/dry the spill, and keep the sign displayed until the floor is completely dry.", "Place a paper towel over the wet spot and clean it up during closing hours.", "Ask customers to jump over the wet area while you fetch the mop."],
+                answer: 1,
+                explanation: "Slip and fall accidents are major workplace safety liabilities. WHS rules require placing a 'Wet Floor' sign immediately and leaving it in place until the wet surface is completely dry."
+            },
+            {
+                question: "A customer informs you they have a severe allergy (e.g., celiac disease) and asks if a dish is gluten-free. What is the correct response?",
+                options: ["Taste the food yourself to make sure there are no breadcrumbs in it.", "Tell them 'it's probably fine' to keep things moving quickly.", "Consult the chef or manager immediately to check the exact ingredients and confirm if any cross-contact could have occurred.", "Advise them that we do not accommodate allergy requests and they should eat elsewhere."],
+                answer: 2,
+                explanation: "Food allergies can cause life-threatening anaphylaxis. You must never guess. Always check recipe specifications, consult the chef/manager, and communicate allergen risks transparently."
+            },
+            {
+                question: "Where should chemical cleaners (bleach, heavy-duty degreasers, sanitisers) be stored in a restaurant kitchen?",
+                options: ["On a shelf right next to dry food ingredients for convenience.", "In a designated chemical storage cupboard completely separate from food storage and food prep areas.", "In clean sauce bottles once they are empty to save space.", "With their caps off so they can air out easily."],
+                answer: 1,
+                explanation: "Chemicals must be stored away from food to prevent accidental chemical contamination of dishes. Placing chemicals in food containers is extremely dangerous and strictly illegal."
+            },
+            // 신규 보강 5문항
+            {
+                question: "What is the major danger of using hand sanitiser on greasy, physically soiled hands in a commercial kitchen?",
+                options: [
+                    "The sanitiser will chemically react with grease to form a pleasant lotion.",
+                    "The grease blocks the alcohol from contacting skin, making the sanitiser completely ineffective.",
+                    "The sanitizer will evaporate and create a flammable grease cloud.",
+                    "The sanitiser is highly effective and completely washes away the grease anyway."
+                ],
+                answer: 1,
+                explanation: "Alcohol-based hand sanitisers require clean skin surfaces. Organic materials, grease, fats, and water film completely neutralise sanitising agents, meaning a proper soap-and-water wash is always required first."
+            },
+            {
+                question: "When storing raw poultry, raw beef, and ready-to-eat cakes in a single upright coolroom, which of the following layout configurations is legally required?",
+                options: [
+                    "Cakes at the bottom, beef in the middle, chicken at the top.",
+                    "Cakes at the top, beef in the middle, poultry at the bottom shelf.",
+                    "Poultry at the top, cakes in the middle, beef at the bottom.",
+                    "All items can be stored side-by-side if they are covered in cling wrap."
+                ],
+                answer: 1,
+                explanation: "To prevent raw juices (which carry Salmonella and E. coli) from dripping onto other food, ready-to-eat (RTE) foods like cakes must occupy the top shelves, raw red meat the middle shelves, and raw poultry the lowest shelves."
+            },
+            {
+                question: "While wearing disposable nitrile gloves during prep, you finish handling raw beef. What is the standard procedure before touching the door handle of a clean display fridge?",
+                options: [
+                    "Open the fridge immediately with your gloved hand, as nitrile prevents germ transfer.",
+                    "Remove and discard the contaminated gloves, wash your hands thoroughly, and put on clean gloves or use bare clean hands.",
+                    "Spray your gloved hand with chemical sanitizer and immediately touch the handle.",
+                    "Wipe the glove quickly on your apron before touching the fridge."
+                ],
+                answer: 1,
+                explanation: "Touching equipment or handles with raw-meat-contaminated gloves causes rapid indirect cross-contamination. You must discard the contaminated gloves, perform full hand hygiene, and proceed with clean hands."
+            },
+            {
+                question: "Under Australian Work Health and Safety (WHS) laws, what is the mandatory procedure for managing wet floor warning signs?",
+                options: [
+                    "Signs must be removed immediately after mopping to keep the dining hall looking neat.",
+                    "Signs must remain displayed until the wet floor surface is 100% completely dry.",
+                    "Signs should only be used if customers complain about the wet floor.",
+                    "Signs can be removed 5 minutes after mopping because the air has dried the surface slightly."
+                ],
+                answer: 1,
+                explanation: "Slip-and-fall injuries are significant legal liabilities. Wet floor signs must stay in place until the moisture has completely evaporated and the floor surface is dry."
+            },
+            {
+                question: "Why is it strictly forbidden to store leftover food or ingredients in opened tin metal cans inside the coolroom?",
+                options: [
+                    "Tin cans block cold air from cooling the interior of the food.",
+                    "Exposure to oxygen causes tin oxidation, releasing toxic metallic ions into acidic food.",
+                    "Pests can chew through open tin metal cans easily.",
+                    "Opened tin cans look unpresentable, though they are chemically perfectly safe."
+                ],
+                answer: 1,
+                explanation: "Open metal cans exposed to humid air oxidize quickly, which can cause chemical food contamination. Leftovers must be decanted into food-grade, airtight plastic containers with prep dates labeled."
+            }
+        ];
+
+        // 애플리케이션 상태 관리
+        let currentSlide = 0;
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let selectedOptionIdx = null;
+        let wrongAnswers = []; 
+
+        // DOM 객체 바인딩
+        const trainingSection = document.getElementById('training-section');
+        const quizSection = document.getElementById('quiz-section');
+        const slideContent = document.getElementById('slide-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideNum = document.getElementById('slide-num');
+        const slideProgress = document.getElementById('slide-progress');
+        const headerBadge = document.getElementById('header-badge');
+
+        const quizIntro = document.getElementById('quiz-intro');
+        const quizActive = document.getElementById('quiz-active');
+        const quizResult = document.getElementById('quiz-result');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const quizNum = document.getElementById('quiz-num');
+        const quizProgress = document.getElementById('quiz-progress');
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.getElementById('quiz-options');
+        const quizFeedback = document.getElementById('quiz-feedback');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackText = document.getElementById('feedback-text');
+        const quizNextBtn = document.getElementById('quiz-next-btn');
+
+        const resultMedal = document.getElementById('result-medal');
+        const resultTitle = document.getElementById('result-title');
+        const resultScore = document.getElementById('result-score');
+        const resultDesc = document.getElementById('result-desc');
+        const wrongAnswersSection = document.getElementById('wrong-answers-section');
+        const wrongAnswersList = document.getElementById('wrong-answers-list');
+        const retryBtn = document.getElementById('retry-btn');
+        const exitBtn = document.getElementById('exit-btn');
+
+        // 슬라이드 화면 그리기 함수 (연속된 인덱스 계산기 적용)
+        function renderSlide() {
+            const slide = slides[currentSlide];
+            slideNum.textContent = `${slide.title}`;
+            
+            const pct = ((currentSlide + 1) / slides.length) * 100;
+            slideProgress.style.width = `${pct}%`;
+
+            let startNumber = 1;
+            for (let i = 0; i < currentSlide; i++) {
+                startNumber += slides[i].items.length;
+            }
+
+            let itemsHTML = slide.items.map((item, index) => {
+                const visualHTML = visualTemplates[item.imageTag] || `<div></div>`;
+
+                return `
+                    <div class="flex flex-col md:flex-row gap-5 items-stretch border-l-4 border-emerald-500 pl-4 py-4 bg-slate-50/40 hover:bg-slate-50 rounded-r-xl transition duration-150">
+                        <div class="space-y-2 flex-grow">
+                            <h3 class="text-base md:text-md font-bold text-slate-800">${startNumber + index}. ${item.subtitle}</h3>
+                            <p class="text-xs md:text-sm text-slate-600 leading-relaxed">${item.desc}</p>
+                            <div class="text-[11px] text-slate-400 italic font-normal">
+                                <span class="font-bold text-emerald-600">Visual Graphic Spec:</span> ${item.imageDesc}
+                            </div>
+                        </div>
+
+                        <div class="shrink-0 flex items-center justify-center md:justify-end animate-bg-glow">
+                            ${visualHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            slideContent.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3 text-emerald-600 border-b border-slate-100 pb-3">
+                        <i class="fa-solid ${slide.icon} text-2xl"></i>
+                        <h2 class="text-lg font-bold text-slate-700">Australian Certified Safety Standards</h2>
+                    </div>
+                    <div class="space-y-5">
+                        ${itemsHTML}
+                    </div>
+                </div>
+            `;
+
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextBtn.innerHTML = `평가 준비하기 (Prepare for Quiz) <i class="fa-solid fa-clipboard-question"></i>`;
+                nextBtn.className = "px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow-sm flex items-center gap-2";
+            } else {
+                nextBtn.innerHTML = `다음 (Next) <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.className = "px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition shadow-sm flex items-center gap-2";
+            }
+        }
+
+        // 버튼 제어 리스너
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide();
+                slideContent.scrollTop = 0;
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide();
+                slideContent.scrollTop = 0;
+            } else {
+                transitionToQuiz();
+            }
+        });
+
+        function transitionToQuiz() {
+            trainingSection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            headerBadge.textContent = "Knowledge Assessment";
+            headerBadge.className = "bg-indigo-800 px-3 py-1 rounded-full text-xs font-semibold";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        startQuizBtn.addEventListener('click', () => {
+            quizIntro.classList.add('hidden');
+            quizActive.classList.remove('hidden');
+            currentQuestionIdx = 0;
+            score = 0;
+            wrongAnswers = [];
+            loadQuizQuestion();
+        });
+
+        function loadQuizQuestion() {
+            selectedOptionIdx = null;
+            quizFeedback.classList.add('hidden');
+            quizNextBtn.classList.add('hidden');
+            
+            const q = quizData[currentQuestionIdx];
+            quizNum.textContent = `QUESTION ${currentQuestionIdx + 1} / ${quizData.length}`;
+            
+            const pct = ((currentQuestionIdx + 1) / quizData.length) * 100;
+            quizProgress.style.width = `${pct}%`;
+
+            quizQuestion.innerHTML = `<span class="text-indigo-600 mr-2">Q${currentQuestionIdx + 1}.</span> ${q.question}`;
+
+            quizOptions.innerHTML = '';
+            q.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 hover:border-indigo-50/40 transition font-medium text-sm flex items-start gap-3 option-btn";
+                btn.innerHTML = `
+                    <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 text-slate-500">${idx + 1}</span>
+                    <span class="text-slate-700 leading-normal">${option}</span>
+                `;
+                btn.addEventListener('click', () => selectOption(idx));
+                quizOptions.appendChild(btn);
+            });
+        }
+
+        // 엄격한 지식 평가 (틀린 답을 골랐을 때 올바른 정답의 테두리를 절대로 열어주지 않는 대표님 지침 완전 고정!)
+        function selectOption(idx) {
+            if (selectedOptionIdx !== null) return; 
+            selectedOptionIdx = idx;
+
+            const q = quizData[currentQuestionIdx];
+            const optionBtns = quizOptions.querySelectorAll('.option-btn');
+            const isCorrect = idx === q.answer;
+            
+            if (isCorrect) {
+                score += Math.round(100 / quizData.length); // 15문항 비례 점수 연산 보정
+                optionBtns[idx].classList.remove('border-slate-200', 'hover:bg-indigo-50/40');
+                optionBtns[idx].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+                optionBtns[idx].querySelector('span').classList.remove('bg-slate-100', 'text-slate-500');
+                optionBtns[idx].querySelector('span').classList.add('bg-emerald-600', 'text-white');
+                showFeedback(true, q.explanation);
+            } else {
+                wrongAnswers.push({
+                    questionNum: currentQuestionIdx + 1,
+                    questionText: q.question,
+                    yourAnswer: q.options[idx],
+                    correctAnswer: q.options[q.answer],
+                    explanation: q.explanation
+                });
+
+                // 오직 자신이 누른 오답 버튼에만 빨간 테두리를 그리고, 정답이 무엇인지는 절대 밝히지 않음
+                optionBtns[idx].classList.remove('border-slate-200', 'hover:bg-indigo-50/40');
+                optionBtns[idx].classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+                optionBtns[idx].querySelector('span').classList.remove('bg-slate-100', 'text-slate-500');
+                optionBtns[idx].querySelector('span').classList.add('bg-rose-600', 'text-white');
+                showFeedback(false, "Your selection is recorded. The correct concept has been locked. Check the final report card after completing all questions to review your answers.");
+            }
+
+            optionBtns.forEach(btn => btn.disabled = true);
+            quizNextBtn.classList.remove('hidden');
+        }
+
+        function showFeedback(isCorrect, text) {
+            quizFeedback.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-800', 'bg-rose-50', 'border-rose-200', 'text-rose-800');
+            if (isCorrect) {
+                quizFeedback.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
+                feedbackIcon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i>`;
+                feedbackTitle.textContent = "Correct (정답)";
+                feedbackText.innerHTML = text;
+            } else {
+                quizFeedback.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-800');
+                feedbackIcon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i>`;
+                feedbackTitle.textContent = "Answer Locked (선택 완료)";
+                feedbackText.innerHTML = "Study the 48 Australian Certified Standards carefully to resolve misconceptions on the final scorecard.";
+            }
+        }
+
+        quizNextBtn.addEventListener('click', () => {
+            if (currentQuestionIdx < quizData.length - 1) {
+                currentQuestionIdx++;
+                loadQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        });
+
+        // 결과 성적표 카드 렌더링
+        function showQuizResults() {
+            quizActive.classList.add('hidden');
+            quizResult.classList.remove('hidden');
+            
+            // 15문제 비례에 맞게 만점(100) 보정
+            if (wrongAnswers.length === 0) {
+                score = 100;
+            } else {
+                score = Math.max(0, 100 - Math.round(wrongAnswers.length * (100 / quizData.length)));
+            }
+            const isPass = score >= 80;
+
+            if (isPass) {
+                resultMedal.innerHTML = `🏆`;
+                resultTitle.textContent = "Congratulations! You Passed!";
+                resultScore.textContent = `${score} / 100`;
+                resultDesc.innerHTML = `Excellent! You passed the official threshold. You have a great understanding of Australian FSANZ and WHS regulations.`;
+                wrongAnswersSection.classList.remove('hidden');
+                
+                // 다시 공부하기 버튼을 '처음부터 다시 학습하기'가 아닌 일반 복습으로 셋팅
+                retryBtn.textContent = "Review Training (학습 복습하기)";
+            } else {
+                resultMedal.innerHTML = `⚠️`;
+                resultTitle.textContent = "Review Required (불합격)";
+                resultScore.textContent = `${score} / 100`;
+                resultDesc.innerHTML = `<span class="text-rose-600 font-bold block mb-1">점수가 합격 기준(80점) 미만입니다.</span> 규정상 정답을 즉시 확인할 수 없으며, 안전 위생 가이드라인을 '처음 단계부터' 완전히 다시 복독하고 재시험을 치러야 합니다.`;
+                wrongAnswersSection.classList.add('hidden'); // 불합격 시 오답노트 전면 강제 잠금
+                
+                // 다시 공부하기 버튼명을 직관적으로 변경
+                retryBtn.textContent = "Restart From Slide 1 (1페이지부터 재학습하기)";
+            }
+
+            if (wrongAnswers.length > 0 && isPass) {
+                wrongAnswersList.innerHTML = wrongAnswers.map(w => `
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs md:text-sm font-normal text-left">
+                        <div class="flex justify-between font-bold">
+                            <span class="text-rose-600">Review Match Q${w.questionNum}</span>
+                        </div>
+                        <p class="font-semibold text-slate-800 text-left">${w.questionText}</p>
+                        <p class="text-slate-500">Your Choice: <span class="line-through text-rose-500 font-medium">${w.yourAnswer}</span></p>
+                        <p class="text-slate-700 font-medium">Correct Answer: <span class="text-emerald-600 font-bold">${w.correctAnswer}</span></p>
+                        <p class="text-slate-500 bg-white p-2.5 rounded border border-slate-150 leading-relaxed mt-1"><i class="fa-solid fa-circle-info text-emerald-500 mr-1"></i> ${w.explanation}</p>
+                    </div>
+                `).join('');
+            } else if (wrongAnswers.length === 0) {
+                wrongAnswersList.innerHTML = `
+                    <div class="text-center py-6 text-slate-400 text-sm">
+                        <i class="fa-solid fa-circle-check text-2xl text-emerald-500 mb-2 block"></i>
+                        Perfect! 100% correct answers.
+                    </div>
+                `;
+            }
+        }
+
+        // 다시 공부하기 버튼 클릭 시 이벤트 핸들러 개정 (불합격 여부에 관계없이 슬라이드 1부터 공부하도록 제어)
+        retryBtn.addEventListener('click', () => {
+            quizResult.classList.add('hidden');
+            quizSection.classList.add('hidden');
+            trainingSection.classList.remove('hidden');
+            headerBadge.textContent = "Training Session";
+            headerBadge.className = "bg-emerald-800 px-3 py-1 rounded-full text-xs font-semibold";
+            currentSlide = 0; // 강제 슬라이드 1번으로 유턴
+            renderSlide();
+            slideContent.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.onload = function() {
+            renderSlide();
+        };
+    </script>
+</body>
+</html>
